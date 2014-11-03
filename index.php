@@ -1,13 +1,13 @@
-<?php 
+<?php
 	ob_start ();
 
-	include ("includes/top_page.php"); 
-	include ("includes/header.php");        
-	include ("includes/menu.php"); 
+	include ("includes/top_page.php");
+	include ("includes/header.php");
+	include ("includes/menu.php");
 
 	echo ("<div id=\"templatemo_main\">"); 
 
-	include ("includes/pages.php");  
+	include ("includes/pages.php");
 
 	echo ("</div>"); 
 
