@@ -1,0 +1,13 @@
+<div id="templatemo_menu" class="ddsmoothmenu">
+        <ul>
+            <li><a href="index.html" class="selected">Inicio</a></li>
+            <li><a href="gallery.html">Tema 1</a>
+                <ul>
+                    <li><a rel="nofollow" href="?page=ejercicio1">Ficha Personal</a></li>
+                    <li><a rel="nofollow" href="?page=paletacolores.">Paleta de colores</a></li>
+              	</ul>
+            </li>
+            <li><a href="http://alpha-developer.blogspot.com.es">Blog</a></li>
+        </ul>
+    <br style="clear: left" />
+</div> <!-- end of templatemo_menu -->
