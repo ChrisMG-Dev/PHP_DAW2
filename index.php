@@ -5,7 +5,7 @@
 	include ("includes/header.php");
 	include ("includes/menu.php");
 
-	echo ("<div id=\"templatemo_main\">"); 
+	echo ("<div id=\"templatemo_main\">");
 
 	include ("includes/pages.php");
 
