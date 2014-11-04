@@ -1,6 +1,10 @@
 <?php
     session_start();
     
+
+    setcookie("lastAccess", date("Y-m-d H:i:s"));
+
+    
     if (!isset ($_SESSION['historial'])) {
         $_SESSION['historial'] = array ();
     }
