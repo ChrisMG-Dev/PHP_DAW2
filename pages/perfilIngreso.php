@@ -7,7 +7,10 @@
      * @version 1.0
      * @license http://opensource.org/licenses/GPL-3.0 GNU GPL 3.0
      */
-    session_start();
+
+    if (!isset($_SESSION)) { 
+        session_start (); 
+    } 
     
     function getUserData() {
         if (isset ($_POST['user'])) {

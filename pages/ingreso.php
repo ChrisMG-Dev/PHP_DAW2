@@ -8,7 +8,9 @@
      * @license http://opensource.org/licenses/GPL-3.0 GNU GPL 3.0
      */
     
-    session_start();
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    } 
 
     $usuario = "";
     $pw = "";

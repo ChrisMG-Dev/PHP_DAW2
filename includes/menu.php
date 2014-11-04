@@ -58,6 +58,8 @@
                             Activado/Desactivado</a></li>
                     <li><a rel="nofollow" href="?page=cookies/visitasPagina">
                             Visitas</a></li>
+                    <li><a rel="nofollow" href="?page=cookies/historial">
+                            Historial Nav</a></li>
                             
 
                 </ul>

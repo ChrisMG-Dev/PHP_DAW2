@@ -37,7 +37,7 @@
             <input type="button" 
                    onclick="document.cookie=
                                'counter=;expires=Wed; 01 Jan 1970';
-                       location.href = document.referrer; return false; " 
+                       window.location.reload(true); return false; " 
                        value="Eliminar Cookie"/>
     </body>
 </html>

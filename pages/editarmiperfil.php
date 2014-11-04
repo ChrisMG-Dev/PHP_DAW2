@@ -7,7 +7,9 @@
  * @license http://opensource.org/licenses/GPL-3.0 GNU GPL 3.0 
  */
 
-  session_start();
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    } 
 
   if (!isset ($_SESSION['usuario']) || ($_SESSION['usuario'][0] != "usuario" || 
           $_SESSION['usuario'][1] != "usuario")) {
