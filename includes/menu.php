@@ -54,6 +54,11 @@
                 <ul>
                     <li><a rel="nofollow" href="?page=login">
                             Login</a></li>
+                    <li><a rel="nofollow" href="?page=cookies/cookieEnabled">
+                            Activado/Desactivado</a></li>
+                    <li><a rel="nofollow" href="?page=cookies/visitasPagina">
+                            Visitas</a></li>
+                            
 
                 </ul>
             </li>
