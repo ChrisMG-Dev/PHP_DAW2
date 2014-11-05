@@ -22,7 +22,7 @@
                     <li><a rel="nofollow" href="?page=notasdwes">
                             Notas</a></li>
                     <li><a rel="nofollow" href="?page=formulario">
-                            Formulario (EJ clase)</a></li>
+                            Formulario (clase)</a></li>
               	</ul>
             </li>
             <li><a href="#">Arrays</a>
@@ -34,7 +34,7 @@
                     <li><a rel="nofollow" href="?page=primitiva">
                             Primitiva</a></li>
                     <li><a rel="nofollow" href="?page=arrays">
-                            Usuarios y multas </a></li>
+                            Usuarios/multas </a></li>
                 
               	</ul>
             </li>
@@ -47,7 +47,7 @@
                     <li><a rel="nofollow" href="?page=formulario_paises">
                             Banderas</a></li>
                     <li><a rel="nofollow" href="?page=formulario_suma">
-                            Sumar números</a></li>
+                            Sumar</a></li>
               	</ul>
             </li>
             <li><a href="#">Cookies</a>
@@ -55,13 +55,13 @@
                     <li><a rel="nofollow" href="?page=login">
                             Login</a></li>
                     <li><a rel="nofollow" href="?page=cookies/cookieEnabled">
-                            Activado/Desactivado</a></li>
+                            On/Off</a></li>
                     <li><a rel="nofollow" href="?page=cookies/visitasPagina">
                             Visitas</a></li>
                     <li><a rel="nofollow" href="?page=cookies/historial">
-                            Historial Nav</a></li>
-                            
-
+                            Historial</a></li>
+                    <li><a rel="nofollow" href="?page=cookies/ultimaAcceso">
+                            Último acceso</a></li>
                 </ul>
             </li>
             <li><a href="#">Sesiones</a>
@@ -71,6 +71,13 @@
                     <li><a rel="nofollow" href="?page=ingreso">
                             Ingreso</a></li>
                 </ul>
+            </li>
+            <li><a href="#">Ficheros</a>
+                <ul>
+                    <li><a rel="nofollow" href="?page=ficheros/sqlalumnos">
+                            SQL Alumnos</a></li>
+                </ul>
+            </li>
             <li><a href="http://alpha-developer.blogspot.com.es">Blog</a></li>
         </ul>
     <br style="clear: left" />

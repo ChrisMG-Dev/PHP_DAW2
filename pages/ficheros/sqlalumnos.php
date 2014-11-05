@@ -55,7 +55,8 @@ $usuarioDb = array ();
             li:nth-child(3n+4) {
                 margin-top: 20px;
             }
-            .button{
+            
+            input[type="button"]{
                 text-decoration:none; text-align:center; 
                 padding:11px 32px; 
                 border:none; 
@@ -87,7 +88,7 @@ $usuarioDb = array ();
                     0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;  
             }
             
-            .button:hover{
+            input[type="button"]:hover{
                 padding:11px 32px; 
                 border:none; 
                 -webkit-border-radius:13px;
@@ -141,7 +142,7 @@ $usuarioDb = array ();
         </script>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include ("includes/source.php"); ?>
         <h2>Generación de script</h2>
 <?php
 
@@ -149,19 +150,19 @@ $usuarioDb = array ();
 if ($alumnos) {
     
     // Recoge línea y verifica si existe
-    while (($buffer = fgets($alumnos)) !== false) {
+    while (($buffer = fgets ($alumnos)) !== false) {
         
-        $buffer = explode(",", $buffer);
+        $buffer = explode (",", $buffer);
         
         // Crea un nombre de usuario y de bd
-        $nombre = formatUserName($buffer);
-        $db = formatUserName($buffer, 2);
+        $nombre = formatUserName ($buffer);
+        $db = formatUserName ($buffer, 2);
         
         $usuarioAlumnos[] = $nombre;
         $usuarioDb[] = $db;
     }
     
-    if (!feof($alumnos)) {
+    if (!feof ($alumnos)) {
         echo "Error: fgets() da error\n";
     }
     
@@ -177,11 +178,14 @@ if ($alumnos) {
         
         $dbUsuarios = "bd" . $usuarioDb[$i];
         $query .= "INSERT INTO " . $tablaUsuarios 
-                . "(" . $columnaUsuarios . ") ";
-        $query .= "VALUES (" . $usuarioAlumnos[$i] . ");\n";
+            . "(" . $columnaUsuarios . ") ";
+        $query .= "VALUES (" . $usuarioAlumnos[$i] . ");"
+            . "\n";
         $query .= "CREATE DATABASE " . $dbUsuarios . ";" 
-            . "\nGRANT ALL PRIVILEGES ON " . $dbUsuarios . ".* TO '" 
-            . $usuarioAlumnos[$i] . "'@'localhost' IDENTIFIED BY '" 
+            . "\n"
+            . "GRANT ALL PRIVILEGES ON " . $dbUsuarios . ".* TO '" 
+            . $usuarioAlumnos[$i] . 
+            "'@'localhost' IDENTIFIED BY '" 
             . $usuarioAlumnos[$i] . "';";
         
         if (count ($usuarioAlumnos) != $i) {
@@ -190,8 +194,8 @@ if ($alumnos) {
     }
     
     // Presentación de los datos en el HTML
-    if (file_put_contents($output, $query) !== false) {
-        $htmlOutput = explode(";", file_get_contents($output));
+    if (file_put_contents ($output, $query) !== false) {
+        $htmlOutput = explode (";", file_get_contents ($output));
         echo "<h3>Script generado con éxito!</h3>";
         echo "<input id='showContent' type='button' "
             . "value='Mostrar contenido' class='button'/>&nbsp;&nbsp;";
@@ -213,7 +217,7 @@ if ($alumnos) {
         echo "<h3>Se ha producido un error en la creación del script</h3>";
     }
     
-    fclose($alumnos);
+    fclose ($alumnos);
 }
 ?>
     </body>
