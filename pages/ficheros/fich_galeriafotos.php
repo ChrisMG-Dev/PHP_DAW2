@@ -47,5 +47,9 @@
                 <input type="submit" value="Subir imagen" name="subir">
             </fieldset>
         </form>
+        <br />
+        <a href="?page=galeria_img" target="_blank">
+            <input type="button" value="Ver galería" name="vergaleria" />
+        </a>
     </body>
 </html>

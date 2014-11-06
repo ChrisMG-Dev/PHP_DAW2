@@ -76,6 +76,10 @@
                 <ul>
                     <li><a rel="nofollow" href="?page=ficheros/sqlalumnos">
                             SQL Alumnos</a></li>
+                    <li><a rel="nofollow" href="?page=ficheros/fich_galeriafotos">
+                            Subir imágenes</a></li>
+                    <li><a rel="nofollow" href="?page=galeria_img">
+                            Ver imágenes</a></li>
                 </ul>
             </li>
             <li><a href="http://alpha-developer.blogspot.com.es">Blog</a></li>
