@@ -52,11 +52,11 @@ $usuarioDb = array ();
                 list-style: none;
             }
             
-            li:nth-child(3n+4) {
-                margin-top: 20px;
+            #hiddenContent li:nth-child(3n+4) {
+                padding-top: 20px;
             }
             
-            input[type="button"]{
+            input[type="button"].button{
                 text-decoration:none; text-align:center; 
                 padding:11px 32px; 
                 border:none; 
@@ -88,7 +88,7 @@ $usuarioDb = array ();
                     0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;  
             }
             
-            input[type="button"]:hover{
+            input[type="button"].button:hover{
                 padding:11px 32px; 
                 border:none; 
                 -webkit-border-radius:13px;
