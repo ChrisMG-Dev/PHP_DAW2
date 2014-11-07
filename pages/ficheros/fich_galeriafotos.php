@@ -14,15 +14,18 @@
         <title>Ficheros - Galeria Fotos</title>
         <script type="text/javascript">
             function checkSize() {
+                
                 var max_size = parseInt(document.
                         getElementById("maxSize").value);
+                
                 var input = document.getElementById("upload");
 
-                if(input.files && input.files.length == 1) {           
+                if(input.files && input.files.length === 1) {           
                     if (input.files[0].size > max_size) {
+                        
                         document.getElementById("errorMsg").innerHTML =
                                 "El tamaño no puede ser superior a " + 
-                                ((max_size) / 1024) + "KB.";
+                                parseInt(((max_size) / 1024)/1024) + "MB.";
                         return false;
                     }
                 }
@@ -37,7 +40,7 @@
               enctype="multipart/form-data" onsubmit="return checkSize();">
             <fieldset style="display: inline-block;">
                 <input id="maxSize" type="hidden" 
-                       name="MAX_FILE_SIZE" value="3145728" />
+                       name="MAX_FILE_SIZE" value="4194304" />
                 Selecciona la imagen a subir:
                 <input id="upload" type="file" name="fileToUpload"
                        id="fileToUpload" />

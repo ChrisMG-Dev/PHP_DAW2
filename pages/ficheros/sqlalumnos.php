@@ -174,19 +174,28 @@ if ($alumnos) {
     // Nombre de la columna
     $columnaUsuarios = "usuario";
     
+    // Creación del contenido del script
     for ($i = 0; $i < count ($usuarioAlumnos); $i += 1) {
         
+        $createUser = "";
+        $createDb = "";
+        $privileges = "";
+        
         $dbUsuarios = "bd" . $usuarioDb[$i];
-        $query .= "INSERT INTO " . $tablaUsuarios 
-            . "(" . $columnaUsuarios . ") ";
-        $query .= "VALUES (" . $usuarioAlumnos[$i] . ");"
+        $createUser .= "CREATE USER '". $usuarioAlumnos[$i]
+                . "'@'localhost' IDENTIFIED BY '" . $usuarioAlumnos[$i] . "';";
+        
+        $createDb .= "CREATE DATABASE " . $dbUsuarios . ";" 
             . "\n";
-        $query .= "CREATE DATABASE " . $dbUsuarios . ";" 
-            . "\n"
-            . "GRANT ALL PRIVILEGES ON " . $dbUsuarios . ".* TO '" 
+        
+        $privileges .= "GRANT ALL PRIVILEGES ON " . $dbUsuarios . ".* TO '" 
             . $usuarioAlumnos[$i] . 
             "'@'localhost' IDENTIFIED BY '" 
             . $usuarioAlumnos[$i] . "';";
+        
+        $query .= $createUser;
+        $query .= $createDb;
+        $query .= $privileges;
         
         if (count ($usuarioAlumnos) != $i) {
             $query .= "\n";
