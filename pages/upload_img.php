@@ -44,14 +44,15 @@
         $uploadOk = 0;
     }
     
-   
-    $max_filesize = (intval(ini_get('upload_max_filesize'))
+    $max_filesize_raw = intval(ini_get('upload_max_filesize'));
+    $max_filesize_bytes = (intval(ini_get('upload_max_filesize'))
         * 1024 * 1024);
        
     
     // Comprueba tamaño
-    if ($_FILES["fileToUpload"]["size"] > $max_filesize) {
-        echo "El archivo es demasiado grande. Máximo 3MB.<br />";
+    if ($_FILES["fileToUpload"]["size"] > $max_filesize_bytes) {
+        echo "El archivo es demasiado grande. Máximo " . $max_filesize_raw 
+            . ".<br />";
         $uploadOk = 0;
     }
     
