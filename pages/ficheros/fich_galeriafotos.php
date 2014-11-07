@@ -25,7 +25,7 @@
                         
                         document.getElementById("errorMsg").innerHTML =
                                 "El tamaño no puede ser superior a " + 
-                                parseInt(((max_size) / 1024)/1024) + "MB.";
+                                (((max_size) / 1024)/1024).toFixed(2) + "MB.";
                         return false;
                     }
                 }
@@ -36,11 +36,16 @@
     </head>
     <body>
         <?php include("includes/source.php"); ?>
+        <?php 
+            $max_filesize = (intval(ini_get('upload_max_filesize'))
+                    * 1024 * 1024);
+        ?>
         <form action="?page=upload_img" method="post"
               enctype="multipart/form-data" onsubmit="return checkSize();">
             <fieldset style="display: inline-block;">
                 <input id="maxSize" type="hidden" 
-                       name="MAX_FILE_SIZE" value="4194304" />
+                       name="MAX_FILE_SIZE" value="
+                           <?php echo $max_filesize ?>" />
                 Selecciona la imagen a subir:
                 <input id="upload" type="file" name="fileToUpload"
                        id="fileToUpload" />

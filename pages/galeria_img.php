@@ -44,7 +44,7 @@ define ("ALLOWED_FORMATS", "jpg,png,jpeg,gif");
                 }
             }
             
-            echo "</div>"
+            echo "</div>";
         ?>
     </body>
 </html>
