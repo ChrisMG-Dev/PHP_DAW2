@@ -1,4 +1,5 @@
 <?php
+include_once("obj_animal.php");
 class Persona {
     private $_nombre;
     private $_apellidos;
@@ -10,7 +11,7 @@ class Persona {
         $this->dni = $dni;
     }
     
-    public function darDeComer($animal, $comida) {
+    public function darDeComer(Animal $animal, $comida) {
         $animal->comer($comida);
     }
 }

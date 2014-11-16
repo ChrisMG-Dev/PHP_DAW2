@@ -7,11 +7,15 @@
  * @license GNU GPL http://www.gnu.org/copyleft/gpl.html
  */
 
-require("pages/objetos/obj_persona.php");
-require("pages/objetos/obj_veterinario.php");
+include_once "obj_persona.php";
+include_once "obj_veterinario.php";
 
 if(!isset($_POST['entrar'])) {
     header("Location: index.php?page=objetos/login_personas");
+}
+
+if(!isset($_SESSION['animales'])) {
+    $_SESSION['animales'] = array();
 }
 
 if ($_POST['tipoPersona'] == "persona") {
@@ -31,15 +35,17 @@ else if ($_POST['tipoPersona'] == "veterinario") {
     </head>
     <body>
         <h2>Animales</h2>
-        <?php
-            if(isset($_SESSION['animales'])) {
-               echo "<ul>";
-               foreach ($_SESSION['animales'] as $animal) {
-                   echo "<li>" . $animal->getNombre() . "</li>";
-               }
-               echo "</ul>";
-            }
-        ?>
-        <input type="submit" name="crear" value="Crear animal" />
+        <form action="?page=objetos/crear_animal" method="post">
+            <?php
+                if(isset($_SESSION['animales'])) {
+                   echo "<ul>";
+                   foreach ($_SESSION['animales'] as $animal) {
+                       echo "<li>" . $animal->getNombre() . "</li>";
+                   }
+                   echo "</ul>";
+                }
+            ?>
+            <input type="submit" name="crear" value="Crear animal" />            
+        </form>
     </body>
 </html>

@@ -4,12 +4,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/prueba/pages/galeria_img.php</file>
-            <file>file:/var/www/prueba/pages/cookies/historial.php</file>
-            <file>file:/var/www/prueba/pages/upload_img.php</file>
-            <file>file:/var/www/prueba/pages/ficheros/sqlalumnos.php</file>
-            <file>file:/var/www/prueba/pages/ficheros/fich_galeriafotos.php</file>
-            <file>file:/var/www/prueba/pages/proLogin.php</file>
+            <file>file:/var/www/daw2/pages/objetos/obj_animal.php</file>
+            <file>file:/var/www/daw2/pages/objetos/obj_persona.php</file>
+            <file>file:/var/www/daw2/pages/objetos/login_personas.php</file>
+            <file>file:/var/www/daw2/pages/objetos/custom_menu.php</file>
+            <file>file:/var/www/daw2/pages/objetos/obj_veterinario.php</file>
         </group>
     </open-files>
 </project-private>
