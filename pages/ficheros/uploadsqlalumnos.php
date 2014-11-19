@@ -21,11 +21,17 @@
 
             for ($i = 1; $i < count($sliced); $i += 1) {
                 $added = false;
+                
                 if (in_array($sliced[$i], $tokens)) {
                     $apellido1 .= $sliced[$i] . " ";
                     $added = true;
-                } 
+                }
+                
                 else if (!$added) {
+                    if ($i == 1) {
+                        break;
+                    }
+                    
                     $apellido1 .= $sliced[$i] . " ";
                     break;
                 }
