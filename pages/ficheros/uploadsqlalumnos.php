@@ -12,6 +12,7 @@
     setlocale(LC_ALL,'es_ES.utf8');
     $host = "localhost";
     $uploaddir = '/var/www/prueba/uploads/';
+    $result = array ();
 
     if (isset($_POST['subir'])) {
         $usuarios = array ();
@@ -92,9 +93,9 @@
         $nombres_unicos = array_unique($usuarios);
         
         for ($i = 0; $i < count($nombres_unicos); $i += 1) {
-            if ($tmp[$usuarios[$i]] > 1) {
-                for ($j = 1; $j < $tmp[$usuarios[$i]]; $j++) {
-                    $no_duplicated[] = $usuarios[$i] . $j;                      
+            if ($repeticiones[$usuarios[$i]] > 1) {
+                for ($j = 0; $j < $repeticiones[$usuarios[$i]]; $j++) {
+                    $no_duplicated[] = $usuarios[$i] . ($j + 1);                      
                 }
             } else {
                 $no_duplicated[] = $nombres_unicos[$i];
@@ -120,13 +121,24 @@
             $query = $createUser . "<br />" . $createDb . "<br />" 
                 . $privileges . "<br />";
             
-            //header("Content-type: text/plain");
-            //header("Content-Disposition: attachment; filename=query.txt");
+            
+            
 
-            // do your Db stuff here to get the content into $content
-            //print $query;
-            echo "<br />" . $usuario;            
+
+            $result[] = $query;      
         }
+        
+        header('Content-type: text/txt');
+        header('Content-Disposition: attachment; filename="file.txt"');         
+        
+        $output = "";
+        
+        foreach ($result as $res) {
+            $output .= $res;
+        }
+        
+        print $output;
+        
     }
     
     function formatName ($name, $letters) {
