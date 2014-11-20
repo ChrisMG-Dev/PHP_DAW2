@@ -8,12 +8,28 @@
  */
 ?>
 <?php
-        $file = 'datos/alumnos2.txt';
-        $data = file($file) or die('Could not read file!');
+
+    setlocale(LC_ALL,'es_ES.utf8');
+    $host = "localhost";
+    $uploaddir = '/var/www/prueba/uploads/';
+
+    if (isset($_POST['subir'])) {
+        $usuarios = array ();
+        $uploadfile = $uploaddir . basename($_FILES['myFile']['name']);
+
+        if (move_uploaded_file($_FILES['myFile']['tmp_name'], $uploadfile)) {
+           // echo "File is valid, and was successfully uploaded.\n";
+        } else {
+           // echo "Possible file upload attack!\n";
+        }
+
+
+
+        $data = file($uploadfile) or die('Could not read file!');
         $tokens = array("de","la","del","las","los","mac","mc","van",
             "von","y","i","san","santa");
         $added = false;
-        
+
         foreach ($data as $line) {
             list($apellidos, $nombre) = explode(",",$line);
             $sliced = explode(" ", $apellidos);
@@ -21,40 +37,112 @@
 
             for ($i = 1; $i < count($sliced); $i += 1) {
                 $added = false;
-                
+
                 if (in_array($sliced[$i], $tokens)) {
                     $apellido1 .= $sliced[$i] . " ";
                     $added = true;
                 }
-                
+
                 else if (!$added) {
                     if ($i == 1) {
                         break;
                     }
-                    
+
                     $apellido1 .= $sliced[$i] . " ";
+                    $i++;
                     break;
                 }
-            }                
+            }     
             
-            /*
-            $apellido2 = $sliced[$i + 1];
-            for ($i = $i + 1; $i < count($sliced); $i += 1) {
-                do{
-                    if (in_array($sliced[$i], $tokens)) {
-                        $apellido2 .= $sliced[$i] . " ";
-                    }                    
-                } while (in_array($sliced[$i], $tokens));
-                $apellido2 .= $sliced[$i];
+            $nombre = str_replace(" ", "", $nombre);
+            $nombre = str_replace("-", "", $nombre);
+            $apellido1 = str_replace(" ", "", $apellido1);
+            $apellido1 = str_replace("-", "", $apellido1);
+
+            if (isset($sliced[$i])) {
+                $nombre = formatName($nombre, 2);
+                $apellido2 = $sliced[$i];
+                $apellido2 = str_replace(" ", "", $apellido2);
+                $apellido2 = str_replace("-", "", $apellido2);
+                $apellido2 = formatName($apellido2, 2);
+                $apellido1 = formatName($apellido1, 2);
             }
             
-             * 
-             */
-            echo "Apellido1: " . $apellido1;
-            echo "<br />";
-            echo "Apellido2: " . $apellido2;
-            echo "<br /><br />";
+            else {
+                if (strlen ($apellido1) >= 4) {
+                   $apellido1 = formatName($apellido1, 4);  
+                   $nombre = formatName($nombre, 2);
+                }
+                
+                else {
+                   $apellido1 = formatName($apellido1, 2); 
+                   $nombre = formatName($nombre, 4); 
+                }
+                
+                $apellido2 = "";
+            }
+            
+            $usuario = $apellido1 . $apellido2 . $nombre;
+            $usuarios[] = $usuario;
         }
+        
+        $no_duplicated = array ();
+        $repeticiones = array_count_values($usuarios);
+        
+        $nombres_unicos = array_unique($usuarios);
+        
+        for ($i = 0; $i < count($nombres_unicos); $i += 1) {
+            if ($tmp[$usuarios[$i]] > 1) {
+                for ($j = 1; $j < $tmp[$usuarios[$i]]; $j++) {
+                    $no_duplicated[] = $usuarios[$i] . $j;                      
+                }
+            } else {
+                $no_duplicated[] = $nombres_unicos[$i];
+            }
+        }
+        
+        $grupo = limpiar($_POST['prefijo']);
+        
+        foreach ($no_duplicated as $usuario) {
+            $bd = $grupo . "_" . $usuario;
+            $createUser = "CREATE USER '". $usuario
+                . "'@'" . $host . "' IDENTIFIED BY '" 
+                . $_POST['defaultPass'] . "';";
+
+            $createDb = "CREATE DATABASE " . $bd . ";" 
+                . "\n";
+
+            $privileges = "GRANT ALL PRIVILEGES ON " . $bd . ".* TO '" 
+            . $usuario . 
+            "'@'localhost' IDENTIFIED BY '" 
+            . $usuario . "';";
+
+            $query = $createUser . "<br />" . $createDb . "<br />" 
+                . $privileges . "<br />";
+            
+            //header("Content-type: text/plain");
+            //header("Content-Disposition: attachment; filename=query.txt");
+
+            // do your Db stuff here to get the content into $content
+            //print $query;
+            echo "<br />" . $usuario;            
+        }
+    }
+    
+    function formatName ($name, $letters) {
+        $name = iconv ("UTF-8","ASCII//TRANSLIT",
+            mb_substr (mb_strtolower ($name, "utf-8"),0,$letters, "utf-8"));  
+        return $name;
+    }
+    
+    function limpiar($string) {
+        $string = str_replace(' ', '_', $string);
+        return preg_replace('/[^A-Za-z0-9\_-]/', '', $string);
+    }
+    
+    function get_duplicates( $array ) {
+        return array_unique( array_diff_assoc( $array, array_unique( $array ) ) );
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -64,7 +152,7 @@
     </head>
     <body>
         <?php include("includes/source.php"); ?>   	
-        <form action="?page=ficheros/uploadssqlalumnos.php" method="post" 
+        <form action="?page=ficheros/uploadsqlalumnos" method="post" 
               enctype="multipart/form-data">
             <fieldset>
                 <p>
