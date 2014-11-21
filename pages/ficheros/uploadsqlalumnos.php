@@ -1,6 +1,8 @@
 <?php
 /**
- * Descripcion
+ * Descripcion corta
+ * 
+ * Descripcion larga
  * 
  * @author Muñoz Godenir Christopher
  * @version 1.0
@@ -10,28 +12,27 @@
 <?php
 
     setlocale(LC_ALL,'es_ES.utf8');
-    $host = "localhost";
-    //$uploaddir = '/var/www/daw2/uploads/';
-    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
-    $result = array ();
+    $host = 'localhost';
+    $uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+    $result = array();
 
     if (isset($_POST['subir'])) {
         
-        if (!isset($_POST['prefijo']) || $_POST['prefijo'] == "") {
-            header("location: index.php?page=ficheros/uploadsqlalumnos");
+        if (!isset($_POST['prefijo']) || $_POST['prefijo'] == '') {
+            header('location: index.php?page=ficheros/uploadsqlalumnos');
             $_SESSION['error'] = 1;           
         }
         
-        if (!isset($_POST['defaultPass']) || $_POST['defaultPass'] == "") {
-            header("location: index.php?page=ficheros/uploadsqlalumnos");
+        if (!isset($_POST['defaultPass']) || $_POST['defaultPass'] == '') {
+            header('location: index.php?page=ficheros/uploadsqlalumnos');
             $_SESSION['error'] = 2;
         }
         
-        $usuarios = array ();
+        $usuarios = array();
         $uploadfile = $uploaddir . basename($_FILES['myFile']['name']);
         
-        if (pathinfo($uploadfile, PATHINFO_EXTENSION) != "txt") {
-            header("location: index.php?page=ficheros/uploadsqlalumnos");
+        if (pathinfo($uploadfile, PATHINFO_EXTENSION) != 'txt') {
+            header('location: index.php?page=ficheros/uploadsqlalumnos');
             $_SESSION['error'] = 0;
             exit;
         }
@@ -41,21 +42,21 @@
         $data = file($uploadfile) or die('No se puede leer el archivo!');
         
         // Para reconocer los nombres compuestos
-        $tokens = array("de","la","del","las","los","mac","mc","van",
-            "von","y","i","san","santa");
+        $tokens = array('de','la','del','las','los','mac','mc','van',
+            'von','y','i','san','santa');
         
         $added = false;
 
         foreach ($data as $line) {
-            list($apellidos, $nombre) = explode(",",$line);
-            $sliced = explode(" ", $apellidos);
-            $apellido1 = $sliced[0] . " ";
+            list($apellidos, $nombre) = explode(',', $line);
+            $sliced = explode(' ', $apellidos);
+            $apellido1 = $sliced[0] . ' ';
 
             for ($i = 1; $i < count($sliced); $i += 1) {
                 $added = false;
 
                 if (in_array($sliced[$i], $tokens)) {
-                    $apellido1 .= $sliced[$i] . " ";
+                    $apellido1 .= $sliced[$i] . ' ';
                     $added = true;
                 }
 
@@ -71,16 +72,16 @@
             }     
             
             // Existen nombres con guiones, estos se tratan como un solo nombre
-            $nombre = str_replace(" ", "", $nombre);
-            $nombre = str_replace("-", "", $nombre);
-            $apellido1 = str_replace(" ", "", $apellido1);
-            $apellido1 = str_replace("-", "", $apellido1);
+            $nombre = str_replace(' ', '', $nombre);
+            $nombre = str_replace('-', '', $nombre);
+            $apellido1 = str_replace(' ', '', $apellido1);
+            $apellido1 = str_replace('-', '', $apellido1);
 
             if (isset($sliced[$i])) {
                 $nombre = formatName($nombre, 2);
                 $apellido2 = $sliced[$i];
-                $apellido2 = str_replace(" ", "", $apellido2);
-                $apellido2 = str_replace("-", "", $apellido2);
+                $apellido2 = str_replace(' ', '', $apellido2);
+                $apellido2 = str_replace('-', '', $apellido2);
                 $apellido2 = formatName($apellido2, 2);
                 $apellido1 = formatName($apellido1, 2);
             }
@@ -96,7 +97,7 @@
                    $nombre = formatName($nombre, 4); 
                 }
                 
-                $apellido2 = "";
+                $apellido2 = '';
             }
             
             $usuario = $apellido1 . $apellido2 . $nombre;
@@ -132,7 +133,7 @@
         
         // Generación de la query MySQL
         foreach ($no_duplicated as $usuario) {
-            $bd = $grupo . "_" . $usuario;
+            $bd = $grupo . '_' . $usuario;
             $createUser = "CREATE USER '". $usuario
                 . "'@'" . $host . "' IDENTIFIED BY '" 
                 . $_POST['defaultPass'] . "';\n";
@@ -174,15 +175,15 @@
     // Simplifica los carácteres UTF-8 a ASCII
     // E.J:     Ñ  ->  N, Ç ->  C
     function formatName ($name, $letters) {
-        $name = iconv ("UTF-8","ASCII//TRANSLIT",
+        $name = iconv ('UTF-8','ASCII//TRANSLIT',
             mb_substr (mb_strtolower ($name, "utf-8"),0,$letters, "utf-8"));  
-        return ($name);
+        return $name;
     }
     
     // Limpia una cadena de carácteres especiales no deseados
     function limpiar($string) {
         $string = str_replace(' ', '_', $string);
-        return (preg_replace('/[^A-Za-z0-9\_-]/', '', $string));
+        return preg_replace('/[^A-Za-z0-9\_-]/', '', $string);
     }
 ?>
 <!DOCTYPE html>
