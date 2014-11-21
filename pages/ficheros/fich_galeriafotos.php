@@ -35,7 +35,7 @@
         </script>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <?php 
             $max_filesize = (intval (ini_get ('upload_max_filesize'))
                     * 1024 * 1024);

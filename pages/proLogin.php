@@ -36,7 +36,7 @@ if (isset ($_POST['user']) && isset ($_POST['pw'])) {
         <title>proLogin</title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h2>Bienvenido <?php echo $usuario; ?></h2>
         <input type="button" value="Volver" 
                onclick="location.href = document.referrer; return false;" />

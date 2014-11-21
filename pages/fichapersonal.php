@@ -47,6 +47,6 @@
             echo('</table>');
         ?>
         <br /><br />
-        <a href="fichapersonal.phps" target="_blank">Ver código fuente</a>
+        <?php include("includes/independent_source.php"); ?>
     </body>
 </html>

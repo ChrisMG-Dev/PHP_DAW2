@@ -24,7 +24,7 @@
         <title>formCookie</title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <form action="?page=proLogin" method="post">
             <fieldset>
                 <p>

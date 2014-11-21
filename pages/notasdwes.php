@@ -88,7 +88,7 @@
         </style>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <p>
             <strong>Se redondea a partir de .5 inclusive hacia arriba</strong>
         </p>

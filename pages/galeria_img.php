@@ -23,9 +23,9 @@ define ("ALLOWED_FORMATS", "jpg,png,jpeg,gif");
         </style>
     </head>
     <body>
+        <?php include("includes/independent_source.php"); ?>
         <?php
-            include("includes/source.php");
-            
+
             $directory = "datos/fotos/";
             $images = array();
             

@@ -67,7 +67,7 @@
         </style>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <table>
             <?php
             

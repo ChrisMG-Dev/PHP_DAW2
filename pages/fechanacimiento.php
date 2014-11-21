@@ -15,7 +15,7 @@
    }
    
    else if ($fechaNacimiento[0] == $fechaActual['mon']) {
-       if ($fechaActual['day'] < $fechaNacimiento[1]) {
+       if ($fechaActual['mday'] < $fechaNacimiento[1]) {
            $edad -= 1;
        }
    }
@@ -38,7 +38,7 @@
         }
             ?>
         </p>
-     <?php include("includes/source.php"); ?>
+     <?php include("includes/independent_source.php"); ?>
      </body>
 </html>
 

@@ -18,7 +18,6 @@
             $_SESSION['historial'][] = "HTTP_REFERER no disponible";
         }
     }
-     
     
     ob_start ();
 

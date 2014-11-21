@@ -24,7 +24,7 @@
         <title></title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h2>Editar mi perfil - de <?php echo $_SESSION['usuario'][0] ?></h2>
         <?php ?>
     </body>

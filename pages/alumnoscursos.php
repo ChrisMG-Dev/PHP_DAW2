@@ -1,4 +1,4 @@
-<?php include("includes/source.php"); ?>
+<?php include("includes/independent_source.php"); ?>
 <?php
     $cursos = array (
       "1DAW" => array

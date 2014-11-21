@@ -106,7 +106,7 @@ else {
                      width="100%"/>
             </div>
             <br />
-            <?php include("includes/source.php"); ?>
+            <?php include("includes/independent_source.php"); ?>
         </body>
     </html>
 

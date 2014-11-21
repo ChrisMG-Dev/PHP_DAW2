@@ -14,7 +14,7 @@
         <title></title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h2>Historial de navegación</h2>
         <a href="?page=logout">Logout</a>
         <ul>

@@ -40,7 +40,7 @@
         </style>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <div id="contenedor" />
             <h1>Curriculum vitae</h1>
             

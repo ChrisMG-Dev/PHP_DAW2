@@ -35,7 +35,6 @@
                             Primitiva</a></li>
                     <li><a rel="nofollow" href="?page=arrays">
                             Usuarios/multas </a></li>
-                
               	</ul>
             </li>
             <li><a href="#">Formularios</a>
@@ -74,8 +73,8 @@
             </li>
             <li><a href="#">Ficheros</a>
                 <ul>
-                    <li><a rel="nofollow" href="?page=ficheros/sqlalumnos">
-                            SQL Alumnos</a></li>
+                    <li><a rel="nofollow" href="?page=ficheros/uploadsqlalumnos">
+                            MySQL Alumnos</a></li>
                     <li><a rel="nofollow" href="?page=ficheros/fich_galeriafotos">
                             Subir imágenes</a></li>
                     <li><a rel="nofollow" href="?page=galeria_img">

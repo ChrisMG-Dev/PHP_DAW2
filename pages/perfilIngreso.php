@@ -139,7 +139,7 @@
         <title>Perfil</title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h2>Usted es <?php echo $usuario[0]; ?></h2>
         <div id="opciones">
             <ul>

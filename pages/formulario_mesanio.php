@@ -61,7 +61,7 @@
         </style>
     </head>
     <body>
-     <?php include("includes/source.php"); ?>
+     <?php include("includes/independent_source.php"); ?>
         <form action="?page=formulario_mesanio" method="post">
             <fieldset>
                 <div id="lblContainer">

@@ -41,7 +41,7 @@
     }
 
     ?>
-    <?php include("includes/source.php"); ?>
+    <?php include("includes/independent_source.php"); ?>
         <div id="cabecera">
             <img height="128px"
                  width="128px" src="pages/img/IMG-20130323-WA0005.jpg"/>

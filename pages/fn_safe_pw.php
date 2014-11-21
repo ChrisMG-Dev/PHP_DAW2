@@ -19,7 +19,7 @@
         <title>Contraseña segura</title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <form action="?page=fn_safe_pw" method="post">
             <fieldset style="display: inline-block;">
                 <label>Contraseña</label>

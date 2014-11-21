@@ -22,7 +22,7 @@
         <title>Visitas de la páginas</title>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
             <h2>Usted a entrado <span id="contadorVisita">
             <?php 
                 if (!isset ($_COOKIE['counter'])) {

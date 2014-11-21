@@ -83,7 +83,7 @@
         </style>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h2><?php echo (FECHA);?></h2>
         <table>
             <?php

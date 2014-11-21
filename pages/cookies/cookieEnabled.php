@@ -16,7 +16,7 @@
         <script type="text/javascript" src="/pages/cookies/js/cookieenabled.js"></script>
     </head>
     <body>
-        <?php include("includes/source.php"); ?>
+        <?php include("includes/independent_source.php"); ?>
         <h1>Disponibilidad de los cookies: <span id="cookie"></span></h1>
     </body>
 </html>
