@@ -1,7 +1,6 @@
 <?php
     session_start();
     
-
     setcookie("lastAccess", date("Y-m-d H:i:s"));
 
     
@@ -12,10 +11,6 @@
     else {
         if (isset ($_SERVER['HTTP_REFERER'])) {
             $_SESSION['historial'][] = $_SERVER['HTTP_REFERER'];
-        }
-        
-        else {
-            $_SESSION['historial'][] = "HTTP_REFERER no disponible";
         }
     }
     

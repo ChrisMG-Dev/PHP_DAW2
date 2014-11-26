@@ -1,10 +1,20 @@
 <?php
 /**
- * Descripcion corta
+ * Generación de script SQL en base a un archivo de texto.
  * 
- * Descripcion larga
+ * El programa recoge un archivo de texto subido por el usuario con el siguiente
+ * formato:
  * 
- * @author Muñoz Godenir Christopher
+ * apellido1 apellido2, nombre
+ * 
+ * Y se genera un script para la creación de usuarios y base de datos y
+ * otorgación de permisos a los mismos que se le entrega al usuario una vez
+ * generado.
+ *
+ * El usuario debe introducir además un nombre de prefijo y una contraseña por
+ * defecto.
+ * 
+ * @author Muñoz Godenir Christopher <chrismgdaw@gmail.com>
  * @version 1.0
  * @license http://opensource.org/licenses/GPL-3.0 GNU GPL 3.0 
  */
@@ -27,6 +37,8 @@
             header('location: index.php?page=ficheros/uploadsqlalumnos');
             $_SESSION['error'] = 2;
         }
+        
+        $lenguaje = $_POST['leng'];
         
         $usuarios = array();
         $uploadfile = $uploaddir . basename($_FILES['myFile']['name']);
@@ -69,7 +81,7 @@
                     $i++;
                     break;
                 }
-            }     
+            }
             
             // Existen nombres con guiones, estos se tratan como un solo nombre
             $nombre = str_replace(' ', '', $nombre);
@@ -103,7 +115,7 @@
             $usuario = $apellido1 . $apellido2 . $nombre;
             $usuarios[] = $usuario;
         }
-        
+
         unlink($uploadfile);
         
         // Para usuarios no duplicados
@@ -115,36 +127,84 @@
         // Nombres que no se repiten
         $nombres_unicos = array_unique($usuarios);
         
+        foreach ($nombres_unicos as $unico) {
+            // Si un nombre es repetido...
+            if ($repeticiones[$unico] > 1) {
+                for ($j = 0; $j < $repeticiones[$unico]; $j++) {
+                    $no_duplicated[] = $unico . ($j + 1);      
+                }
+            } else {
+                // Si no es repetido, entonces es único
+                $no_duplicated[] = $unico;
+            }
+        }
+        
+        /*
+        foreach ($no_duplicated as $usuario) {
+            echo $usuario . "<br />";
+        }
+         
+         
+        exit();
+        /*
         for ($i = 0; $i < count($nombres_unicos); $i += 1) {
             // Si un nombre es repetido...
             if ($repeticiones[$usuarios[$i]] > 1) {
                 for ($j = 0; $j < $repeticiones[$usuarios[$i]]; $j++) {
-                    $no_duplicated[] = $usuarios[$i] . ($j + 1);                      
+                    $no_duplicated[] = $usuarios[$i] . ($j + 1);      
                 }
             } else {
                 // Si no es repetido, entonces es único
                 $no_duplicated[] = $nombres_unicos[$i];
             }
         }
+         */
+        
+        $no_duplicated = array_unique($no_duplicated);
         
         // Prefijo que se pondrá antes del nombre de usuario
         // E.J 2DAW1415
         $grupo = limpiar($_POST['prefijo']);
         
-        // Generación de la query MySQL
+        // Generación de la query
         foreach ($no_duplicated as $usuario) {
             $bd = $grupo . '_' . $usuario;
-            $createUser = "CREATE USER '". $usuario
-                . "'@'" . $host . "' IDENTIFIED BY '" 
+            
+            if ($lenguaje == 'mysql') {
+                $createUser = "CREATE USER '". $usuario
+                    . "'@'" . $host . "' IDENTIFIED BY '" 
+                    . $_POST['defaultPass'] . "';\n";
+
+                $createDb = "CREATE DATABASE " . $bd . ";" 
+                    . "\n";
+
+                $privileges = "GRANT ALL PRIVILEGES ON " . $bd . ".* TO '" 
+                . $usuario . 
+                "'@'localhost' IDENTIFIED BY '" 
                 . $_POST['defaultPass'] . "';\n";
+                
+            } else if ($lenguaje == 'postgresql') {
+                $createUser = "CREATE USER ". $usuario
+                    . " WITH PASSWORD '" . $_POST['defaultPass'] .  "';\n";
 
-            $createDb = "CREATE DATABASE " . $bd . ";" 
-                . "\n";
+                $createDb = "CREATE DATABASE \"" . $bd . "\";"
+                    . "\n";
 
-            $privileges = "GRANT ALL PRIVILEGES ON " . $bd . ".* TO '" 
-            . $usuario . 
-            "'@'localhost' IDENTIFIED BY '" 
-            . $usuario . "';\n";
+                $privileges = "GRANT ALL PRIVILEGES ON DATABASE \"" 
+                        . $bd . "\" to "
+                        . $usuario . ";\n";       
+                
+                
+            } else if ($lenguaje == 'sql') {
+                $createUser = "CREATE USER ". $usuario
+                    . " identified by " . $_POST['defaultPass'] .  ";\n";
+
+                $createDb = "CREATE DATABASE " . $bd . ";"
+                    . "\n";
+
+                $privileges = "GRANT ALL ON " . $bd . " TO "
+                        . $usuario . ";\n";    
+            }
 
             $query = $createUser . $createDb
                 . $privileges;
@@ -163,7 +223,8 @@
   	header("Cache-Control: public");
 	header("Content-Description: File Transfer");
         header('Content-type: text/plain');
-        header('Content-Disposition: attachment; filename="query.txt"');
+        header('Content-Disposition: attachment; filename="' 
+                . $grupo . '_' . $lenguaje . '-script.sql"');
 	header("Content-Transfer-Encoding: binary");
         ob_clean();
         flush();
@@ -244,6 +305,14 @@
                     <br />
                     <input type="text" value="usuario" name="defaultPass" 
                            required/>
+                </p>
+                <p>
+                    <input type="radio" name="leng" value="mysql" checked />
+                    MySQL
+                    <input type="radio" name="leng" value="postgresql" />
+                    POSTGRESQL
+                    <input type="radio" name="leng" value="sql" />
+                    SQL
                 </p>
             </fieldset>
             <br /><input type="submit" name="subir" value="Subir" />
