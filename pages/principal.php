@@ -125,6 +125,7 @@
             <h3>Prácticas</h3>
                 <ul>
                     <li><a href="?page=practica1/cuestionario_index">Cuestionario</a></li>
+                    <li><a href="?page=buscaminas/buscaminas">Buscaminas</a></li>
                 </ul>
             </div>
     </body>
