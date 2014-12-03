@@ -8,9 +8,9 @@
  * @version 1.0
  * @license http://opensource.org/licenses/GPL-3.0 GNU GPL 3.0 
  */
-define("ROWS", 5);
-define("COLS", 5);
-define("MINES", 2);
+define("ROWS", 10);
+define("COLS", 10);
+define("MINES", 20);
 define("MINE_TOKEN", 9);
 define("BOOM_TOKEN", 10);
 define("MINE_GRAPHIC", "<img src='pages/img/mina.png' width='24px' height='24px'>");
@@ -215,7 +215,6 @@ function gana()
 function mostrarTablero() {
     $output = crearTablaOutput();
     generarCabeceraHtml();
-    include("includes/independent_source.php");
     echo "<a href='?page=logout' align='center'>Empezar de nuevo</a><br/>";
     //echo "<b>Clicks: " . $_SESSION['clicks'] . "</b>";
     if ($_SESSION['gameover']) {
